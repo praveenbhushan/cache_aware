@@ -1,0 +1,13 @@
+# To compile the code
+g++ matrix_row.cpp -o row.out
+
+# To run valgrind
+valgrind --tool=cachegrind ./row.out
+
+# Using Ubuntu/Linux on WSL then stack size is initialized to very small and program will crash as 
+# we are trying to allocate 2000x2000 array on stack
+# run the following command to make the stack size unlimited
+sudo prlimit --stack=unlimited --pid $$; ulimit -s unlimited
+
+# Check cache size 
+getconf -a | grep CACHE
